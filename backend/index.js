@@ -93,35 +93,29 @@ app.get("/profile", (req, res) => {
   }
 });
 
-app.post("/api/upload-by-link", async (req, res) => {
+app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
   const newName = "photo" + Date.now() + ".jpg";
   await imageDownloader.image({
     url: link,
-    dest: "/tmp/" + newName,
+    dest: __dirname + "/uploads/" + newName,
   });
-  const url = await uploadToS3(
-    "/tmp/" + newName,
-    newName,
-    mime.lookup("/tmp/" + newName)
-  );
-  res.json(url);
+  res.json(newName);
 });
 
-const photosMiddleware = multer({ dest: "/tmp" });
-app.post(
-  "/api/upload",
-  photosMiddleware.array("photos", 100),
-  async (req, res) => {
-    const uploadedFiles = [];
-    for (let i = 0; i < req.files.length; i++) {
-      const { path, originalname, mimetype } = req.files[i];
-      const url = await uploadToS3(path, originalname, mimetype);
-      uploadedFiles.push(url);
-    }
-    res.json(uploadedFiles);
+const photosMiddleware = multer({ dest: "uploads/" });
+app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
+  const uploadedFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+    const { path, originalname } = req.files[i];
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    const newPath = path + "." + ext.toLowerCase();
+    fs.renameSync(path, newPath);
+    uploadedFiles.push(newPath.replace("uploads\\", ""));
   }
-);
+  res.json(uploadedFiles);
+});
 
 app.listen(3000, () => {
   console.log("listening on port 3000");
