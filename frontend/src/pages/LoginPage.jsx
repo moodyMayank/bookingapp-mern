@@ -9,8 +9,9 @@ const LoginPage = () => {
   const [redirect, setRedirect] = useState(false);
   const { setUser } = useContext(UserContext);
 
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = async (ev) => {
+    ev.preventDefault();
+    console.log("Inside Login Submit");
     try {
       const { data } = await axios.post("/login", { email, password });
       setUser(data);
@@ -19,6 +20,7 @@ const LoginPage = () => {
       console.log(err);
       alert("Login failed", err);
     }
+    console.log("Outside Login submit");
   };
 
   if (redirect) return <Navigate to={"/"} />;
