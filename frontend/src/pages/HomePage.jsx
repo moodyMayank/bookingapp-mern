@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [places, setPlaces] = useState([]);
@@ -17,7 +18,7 @@ const HomePage = () => {
       {places.length > 0 &&
         places.map((place) => {
           return (
-            <div>
+            <Link to={"/place/" + place._id} key={place._id}>
               <div className="rounded-2xl mb-2">
                 {place.photos?.[0] && (
                   <img
@@ -32,7 +33,7 @@ const HomePage = () => {
               <div className="mt-1">
                 <span className="font-bold">₹{place.price}</span> per night
               </div>
-            </div>
+            </Link>
           );
         })}
     </div>

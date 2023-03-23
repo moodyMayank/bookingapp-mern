@@ -210,6 +210,10 @@ app.get("/places", async (req, res) => {
   res.json(placeDoc);
 });
 
+app.get("/test", (req, res) => {
+  res.json("Its Working fine");
+});
+
 app.listen(3000, () => {
   console.log("listening on port 3000");
 });
