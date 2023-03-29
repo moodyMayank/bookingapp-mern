@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const User = require("./models/User.js");
 const Place = require("./models/Place.js");
+const Booking = require("./models/Booking.js");
 const imageDownloader = require("image-downloader");
 const multer = require("multer");
 const fs = require("fs");
@@ -28,6 +29,15 @@ app.use(
 
 console.log(process.env.MONGODB_URL);
 mongoose.connect(process.env.MONGODB_URL);
+
+function getUserDataFromToken(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+}
 
 // Post request for registering a new member
 app.post("/register", async (req, res) => {
@@ -208,6 +218,35 @@ app.put("/places", async (req, res) => {
 app.get("/places", async (req, res) => {
   const placeDoc = await Place.find();
   res.json(placeDoc);
+});
+
+app.post("/bookings", async (req, res) => {
+  const { token } = req.cookies;
+  const userData = await getUserDataFromToken(token);
+  const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
+    req.body;
+  Booking.create({
+    place,
+    checkIn,
+    checkOut,
+    numberOfGuests,
+    name,
+    phone,
+    price,
+    user: userData.id,
+  })
+    .then((doc) => {
+      res.json(doc);
+    })
+    .catch((err) => {
+      throw err;
+    });
+});
+
+app.get("/bookings", async (req, res) => {
+  const { token } = req.cookies;
+  const userData = await getUserDataFromToken(token);
+  res.json(await Booking.find({ user: userData.id }).populate("place"));
 });
 
 app.get("/test", (req, res) => {
