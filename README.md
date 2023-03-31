@@ -3,6 +3,7 @@
 [Live Demo](https://weather-application-snowy.vercel.app/)
 
 ## ScreenShot
+![Screenshot 2023-03-31 140839](https://user-images.githubusercontent.com/100838996/229088415-913eab70-43e5-45b3-9088-462caf592a50.png)
 
 ## Tech Stack 
 ReactJS , Taiwlind CSS , Nodejs , ExpressJs ,MongoDB.
@@ -28,9 +29,7 @@ ReactJS , Taiwlind CSS , Nodejs , ExpressJs ,MongoDB.
 - Run 'npm install' command in folder containing package.json file
 - Run `nodemon index.js` to start the backend server.
 
-## Users
-1. mayankbudhiraja88@gmail.com
-   123
-
-2. test123@gmail.com
-   123
+## Demo Users
+username - test1
+gmail - test1@gmail.com
+password - 123
