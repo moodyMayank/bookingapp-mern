@@ -3,16 +3,16 @@
 [Live Demo](https://weather-application-snowy.vercel.app/)
 
 ## ScreenShot
-![Weather Application](https://user-images.githubusercontent.com/100838996/220824856-01eff2ff-723b-4840-a293-f2980876e202.png)
 
 ## Tech Stack 
 ReactJS , Taiwlind CSS , Nodejs , ExpressJs ,MongoDB.
 
 ## Features 
-- If the location permission is not allowed , then it does not shows weather.
-- First it shows current location weather and later we can search any location 
-- It shows city , country , temperature in Celsius and fahrenheit, humidity, visiblity, wind speed, Weather type.  
-- Interactive and Mobile Responsive UI built using Tailwind CSS.
+- Developed mern booking app which includes homepage,PlacePage,User Bookings.
+- Added functionality for user to book and add his own accommodations.
+- Users can book more than 1 accomodation at a time.
+- Adding your own accomodation, allows to add Images , Place Perks , Location , Name , Info , checkIn , CheckOut times , No. of Guests
+
 
 ## Run Project Locally :- { Use Local Branch before Downloading / Cloning Project }
 - Clone / Download the Project 
