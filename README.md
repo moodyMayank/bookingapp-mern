@@ -30,6 +30,6 @@ ReactJS , Taiwlind CSS , Nodejs , ExpressJs ,MongoDB.
 - Run `nodemon index.js` to start the backend server.
 
 ## Demo Users
-username - test1
-gmail - test1@gmail.com
-password - 123
+  - username - test1
+  - gmail - test1@gmail.com
+  - password - 123
