@@ -90,8 +90,9 @@ app.post("/login", async (req, res) => {
           (err, token) => {
             if (err) throw err;
             console.log("Working here");
-            console.log(token);
-            res.cookie("token", token).json(userDoc);
+            console.log("printing token");
+            console.log("jw", token);
+            res.cookie("token", token, { sameSite: "none" }).json(userDoc);
           }
         );
       }
@@ -197,7 +198,7 @@ app.post("/places", (req, res) => {
   });
 });
 
-app.get("/user-places", (req, res) => {
+app.get("/user-places", async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
