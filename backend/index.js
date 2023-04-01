@@ -93,7 +93,7 @@ app.post("/login", async (req, res) => {
             console.log("printing token");
             console.log("jw", token);
             res
-              .cookie("token", token, { sameSite: "none", secure: false })
+              .cookie("token", token, { secure: false, sameSite: "none" })
               .json(userDoc);
           }
         );
