@@ -9,7 +9,9 @@ const Place = require("./models/Place.js");
 const Booking = require("./models/Booking.js");
 const imageDownloader = require("image-downloader");
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+const { log } = require("console");
 
 require("dotenv").config();
 const app = express();
@@ -23,12 +25,18 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "https://bookingapp-mern.vercel.app",
   })
 );
 
 console.log(process.env.MONGODB_URL);
 mongoose.connect(process.env.MONGODB_URL);
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET,
+});
 
 function getUserDataFromToken(token) {
   return new Promise((resolve, reject) => {
@@ -105,6 +113,22 @@ app.get("/profile", (req, res) => {
     res.json(null);
   }
 });
+
+function uploadCloudinary(filePath) {
+  const imageInfo = cloudinary.uploader
+    .upload("./uploads/photo1678966725896.jpg", {
+      folder: "placeImages",
+      use_filename: true,
+      resource_type: "image",
+    })
+    .then((result) => {
+      console.log("success", JSON.stringify(result, null, 2));
+    })
+    .catch((error) => {
+      console.log("error", JSON.stringify(error, null, 2));
+    });
+  return imageInfo;
+}
 
 app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;

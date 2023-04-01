@@ -12,7 +12,7 @@ import PlacePage from "./pages/PlacePage";
 import BookingsPage from "./pages/BookingsPage";
 import BookingPage from "./pages/BookingPage";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://booking-backend-2nfq.onrender.com";
 
 // To set cookies
 axios.defaults.withCredentials = true;
