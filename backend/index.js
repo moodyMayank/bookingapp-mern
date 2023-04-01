@@ -11,7 +11,7 @@ const imageDownloader = require("image-downloader");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const { log } = require("console");
 const connectDB = require("./config/dbConn");
 
