@@ -166,7 +166,7 @@ app.post("/upload-by-link", async (req, res) => {
     .then((result) => {
       console.log("Printing result ", result);
       console.log("success", JSON.stringify(result, null, 2));
-      res.json(result.url);
+      res.json(result.secure_url);
     });
 });
 
