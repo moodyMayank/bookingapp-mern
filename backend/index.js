@@ -90,6 +90,7 @@ app.post("/login", async (req, res) => {
           (err, token) => {
             if (err) throw err;
             console.log("Working here");
+            console.log(token);
             res.cookie("token", token).json(userDoc);
           }
         );
@@ -255,6 +256,7 @@ app.get("/places", async (req, res) => {
 
 app.post("/bookings", async (req, res) => {
   const { token } = req.cookies;
+  console.log(token);
   const userData = await getUserDataFromToken(token);
   const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
     req.body;
