@@ -142,12 +142,11 @@ function uploadCloudinary(filePath) {
     .then((result) => {
       console.log("success", JSON.stringify(result, null, 2));
       imageInfo = JSON.stringify(result, null, 2);
+      return imageInfo;
     })
     .catch((error) => {
       console.log("error", JSON.stringify(error, null, 2));
     });
-  console.log(imageInfo);
-  return imageInfo;
 }
 
 app.post("/upload-by-link", async (req, res) => {
@@ -158,8 +157,17 @@ app.post("/upload-by-link", async (req, res) => {
     url: link,
     dest: filePath,
   });
-  const result = uploadCloudinary(filePath);
-  res.json(result.url);
+  cloudinary.uploader
+    .upload(filePath, {
+      folder: "placeImages",
+      use_filename: true,
+      resource_type: "image",
+    })
+    .then((result) => {
+      console.log(result);
+      console.log("success", JSON.stringify(result, null, 2));
+      res.json(result.json());
+    });
 });
 
 const photosMiddleware = multer({ dest: "/tmp" });
