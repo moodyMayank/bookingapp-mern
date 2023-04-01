@@ -133,7 +133,7 @@ app.get("/profile", (req, res) => {
 
 function uploadCloudinary(filePath) {
   const imageInfo = cloudinary.uploader
-    .upload("./uploads/photo1678966725896.jpg", {
+    .upload(filePath, {
       folder: "placeImages",
       use_filename: true,
       resource_type: "image",
@@ -150,10 +150,12 @@ function uploadCloudinary(filePath) {
 app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
   const newName = "photo" + Date.now() + ".jpg";
+  const filePath = "/tmp/" + newName;
   await imageDownloader.image({
     url: link,
-    dest: __dirname + "/uploads/" + newName,
+    dest: filePath,
   });
+  uploadCloudinary(filePath);
   res.json(newName);
 });
 
