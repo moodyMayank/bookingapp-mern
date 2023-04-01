@@ -164,9 +164,9 @@ app.post("/upload-by-link", async (req, res) => {
       resource_type: "image",
     })
     .then((result) => {
-      console.log(result);
+      console.log("Printing result ", result);
       console.log("success", JSON.stringify(result, null, 2));
-      res.json(result.json());
+      res.json(result.url);
     });
 });
 
