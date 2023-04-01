@@ -132,7 +132,8 @@ app.get("/profile", (req, res) => {
 });
 
 function uploadCloudinary(filePath) {
-  const imageInfo = cloudinary.uploader
+  let imageInfo;
+  cloudinary.uploader
     .upload(filePath, {
       folder: "placeImages",
       use_filename: true,
@@ -140,6 +141,7 @@ function uploadCloudinary(filePath) {
     })
     .then((result) => {
       console.log("success", JSON.stringify(result, null, 2));
+      imageInfo = JSON.stringify(result, null, 2);
     })
     .catch((error) => {
       console.log("error", JSON.stringify(error, null, 2));
@@ -157,7 +159,7 @@ app.post("/upload-by-link", async (req, res) => {
     dest: filePath,
   });
   const result = uploadCloudinary(filePath);
-  res.json(re);
+  res.json(result.url);
 });
 
 const photosMiddleware = multer({ dest: "/tmp" });
