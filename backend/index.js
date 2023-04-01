@@ -11,7 +11,9 @@ const imageDownloader = require("image-downloader");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+const PORT = process.env.PORT || 3000;
 const { log } = require("console");
+const connectDB = require("./config/dbConn");
 
 require("dotenv").config();
 const app = express();
@@ -29,8 +31,15 @@ app.use(
   })
 );
 
-console.log(process.env.MONGODB_URL);
-mongoose.connect(process.env.MONGODB_URL);
+// Connect to MongoDB
+connectDB();
+
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+});
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -275,8 +284,4 @@ app.get("/bookings", async (req, res) => {
 
 app.get("/test", (req, res) => {
   res.json("Its Working fine");
-});
-
-app.listen(3000, () => {
-  console.log("listening on port 3000");
 });
