@@ -144,6 +144,7 @@ function uploadCloudinary(filePath) {
     .catch((error) => {
       console.log("error", JSON.stringify(error, null, 2));
     });
+  console.log(imageInfo);
   return imageInfo;
 }
 
@@ -155,11 +156,11 @@ app.post("/upload-by-link", async (req, res) => {
     url: link,
     dest: filePath,
   });
-  uploadCloudinary(filePath);
-  res.json(newName);
+  const result = uploadCloudinary(filePath);
+  res.json(re);
 });
 
-const photosMiddleware = multer({ dest: "uploads/" });
+const photosMiddleware = multer({ dest: "/tmp" });
 app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
   const uploadedFiles = [];
   for (let i = 0; i < req.files.length; i++) {
@@ -167,8 +168,8 @@ app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext.toLowerCase();
-    fs.renameSync(path, newPath);
-    uploadedFiles.push(newPath.replace("uploads\\", ""));
+    const result = uploadCloudinary(newPath);
+    uploadedFiles.push(result.url);
   }
   res.json(uploadedFiles);
 });
