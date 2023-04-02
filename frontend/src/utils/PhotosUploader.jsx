@@ -72,7 +72,7 @@ const PhotosUploader = ({ addedPhotos, onAddedPhotosChange }) => {
               {console.log("InsideMap", link)}
               <img
                 className="rounded-2xl w-full object-cover"
-                src={link}
+                src={link.photoUrl}
                 alt="Image"
               />
               <button

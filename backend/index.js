@@ -166,7 +166,10 @@ app.post("/upload-by-link", async (req, res) => {
     .then((result) => {
       console.log("Printing result ", result);
       console.log("success", JSON.stringify(result, null, 2));
-      res.json(result.secure_url);
+      res.json({
+        photoId: result.public_id,
+        photoUrl: result.secure_url,
+      });
     });
 });
 
