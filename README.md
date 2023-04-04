@@ -1,6 +1,6 @@
 # BookEasy.com : Booking Application  
 
-[Live Demo](https://weather-application-snowy.vercel.app/)
+[Live Demo](https://bookingapp-mern.vercel.app)
 
 ## ScreenShot
 ![Screenshot 2023-03-31 140839](https://user-images.githubusercontent.com/100838996/229088415-913eab70-43e5-45b3-9088-462caf592a50.png)
