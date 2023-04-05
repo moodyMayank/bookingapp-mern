@@ -5,8 +5,8 @@ import { UserContext } from "../context/UserContext";
 const Header = () => {
   const { user } = useContext(UserContext);
   return (
-    <div className="flex">
-      <div>
+    <div className="">
+      <div className="flex items-center justify-center">
         WebApp is hosted on shared hosting , takes some time to load ... Do
         Refresh 1-2 time
       </div>

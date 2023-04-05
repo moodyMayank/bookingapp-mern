@@ -58,7 +58,7 @@ const PlaceGallery = ({ place }) => {
               <img
                 onClick={() => setshowAllPhotos(true)}
                 className="aspect-square object-cover w-[100%]"
-                src={place.photos?.[0].photoUrl}
+                src={place.photos?.[0]?.photoUrl}
                 alt="Image here"
               />
             )}
@@ -69,7 +69,7 @@ const PlaceGallery = ({ place }) => {
                 <img
                   onClick={() => setshowAllPhotos(true)}
                   className="aspect-square object-cover w-[100%]"
-                  src={place.photos?.[1].photoUrl}
+                  src={place.photos?.[1]?.photoUrl}
                   alt="Image here"
                 />
               )}
@@ -79,7 +79,7 @@ const PlaceGallery = ({ place }) => {
                 <img
                   onClick={() => setshowAllPhotos(true)}
                   className="aspect-square object-cover w-[100%]"
-                  src={place.photos?.[2].photoUrl}
+                  src={place.photos?.[2]?.photoUrl}
                   alt="Image here"
                 />
               )}
