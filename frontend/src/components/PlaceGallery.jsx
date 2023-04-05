@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const PlaceGallery = ({ place }) => {
+  console.log("Showing Places", place);
   const [showAllPhotos, setshowAllPhotos] = useState(false);
 
   if (showAllPhotos) {
