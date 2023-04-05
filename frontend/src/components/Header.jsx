@@ -6,9 +6,9 @@ const Header = () => {
   const { user } = useContext(UserContext);
   return (
     <div className="">
-      <div className="flex items-center justify-center">
-        WebApp is hosted on shared hosting , takes some time to load ... Do
-        Refresh 1-2 time
+      <div className="flex items-center justify-center bg-primary text-white text-lg p-5">
+        WebApp is deploy on shared hosting , takes some time to load ... Do
+        Refresh 2-3 time for proper working
       </div>
       <header className="p-4 flex justify-between">
         <Link to={"/"} href="" className="flex items-center space-x-1">

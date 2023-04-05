@@ -18,7 +18,7 @@ const BookingsPage = () => {
   return (
     <div>
       <AccountNav />
-      <div>
+      <div className="flex flex-col gap-2">
         {bookings?.length > 0 &&
           bookings.map((booking) => {
             return (
