@@ -7,7 +7,7 @@ const PlaceGallery = ({ place }) => {
     return (
       <div className="absolute inset-0 bg-black">
         <div className="flex justify-evenly mt-2 px-4 py-2">
-          <h1 className="text-white text-3xl">Photos of {place.title}</h1>
+          <h1 className="text-white text-3xl">Photos of {place?.title}</h1>
           <button
             onClick={() => setshowAllPhotos(false)}
             className="flex items-center bg-white text-black px-2 py-1 rounded-lg"
@@ -37,7 +37,7 @@ const PlaceGallery = ({ place }) => {
                 <div className="h-[500px] w-[1000px]  ">
                   <img
                     className="h-[100%] w-[100%] object-cover"
-                    src={photo.photoUrl}
+                    src={photo?.photoUrl}
                     alt=""
                   />
                 </div>
