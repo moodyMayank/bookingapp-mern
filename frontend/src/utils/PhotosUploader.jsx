@@ -30,23 +30,23 @@ const PhotosUploader = ({ addedPhotos, onAddedPhotosChange }) => {
     setPhotoLink("");
   };
 
-  const uploadPhoto = (ev) => {
-    const files = ev.target.files;
-    const data = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      data.append("photos", files[i]);
-    }
-    axios
-      .post("/upload", data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((response) => {
-        const { data: filenames } = response;
-        onAddedPhotosChange((prev) => {
-          return [...prev, ...filenames];
-        });
-      });
-  };
+  // const uploadPhoto = (ev) => {
+  //   const files = ev.target.files;
+  //   const data = new FormData();
+  //   for (let i = 0; i < files.length; i++) {
+  //     data.append("photos", files[i]);
+  //   }
+  //   axios
+  //     .post("/upload", data, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     })
+  //     .then((response) => {
+  //       const { data: filenames } = response;
+  //       onAddedPhotosChange((prev) => {
+  //         return [...prev, ...filenames];
+  //       });
+  //     });
+  // };
 
   console.log("Outside Return", addedPhotos);
   return (
@@ -131,7 +131,7 @@ const PhotosUploader = ({ addedPhotos, onAddedPhotosChange }) => {
               </button>
             </div>
           ))}
-        <label className="flex items-center justify-center gap-1 border bg-transparent rounded-2xl p-8 text-2xl text-gray-600 cursor-pointer h-32">
+        {/* <label className="flex items-center justify-center gap-1 border bg-transparent rounded-2xl p-8 text-2xl text-gray-600 cursor-pointer h-32">
           <input
             type="file"
             multiple
@@ -153,7 +153,7 @@ const PhotosUploader = ({ addedPhotos, onAddedPhotosChange }) => {
             />
           </svg>
           Upload
-        </label>
+        </label> */}
       </div>
     </>
   );

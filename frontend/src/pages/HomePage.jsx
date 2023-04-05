@@ -23,7 +23,7 @@ const HomePage = () => {
                 {place.photos?.[0] && (
                   <img
                     className="rounded-2xl aspect-square object-cover"
-                    src={"http://localhost:3000/uploads/" + place.photos?.[0]}
+                    src={place.photos?.[0].photoUrl}
                     alt=""
                   />
                 )}

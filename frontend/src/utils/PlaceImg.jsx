@@ -6,7 +6,7 @@ const PlaceImg = ({ place, index = 0, className = null }) => {
       {place.photos.length > 0 && (
         <img
           className={className}
-          src={"http://localhost:3000/uploads/" + place.photos[index]}
+          src={place.photos?.[index].photoUrl}
           alt=""
         />
       )}

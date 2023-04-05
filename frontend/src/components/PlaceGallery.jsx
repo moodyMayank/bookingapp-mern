@@ -30,11 +30,14 @@ const PlaceGallery = ({ place }) => {
         <div className="flex flex-col justify-center items-center py-4 mt-1 mb-1 gap-2 bg-black">
           {place?.photos?.length > 0 &&
             place.photos.map((photo) => {
+              {
+                console.log(photo);
+              }
               return (
                 <div className="h-[500px] w-[1000px]  ">
                   <img
                     className="h-[100%] w-[100%] object-cover"
-                    src={"http://localhost:3000/uploads/" + photo}
+                    src={photo.photoUrl}
                     alt=""
                   />
                 </div>
@@ -54,7 +57,7 @@ const PlaceGallery = ({ place }) => {
               <img
                 onClick={() => setshowAllPhotos(true)}
                 className="aspect-square object-cover w-[100%]"
-                src={"http://localhost:3000/uploads/" + place.photos?.[0]}
+                src={place.photos?.[0].photoUrl}
                 alt="Image here"
               />
             )}
@@ -65,7 +68,7 @@ const PlaceGallery = ({ place }) => {
                 <img
                   onClick={() => setshowAllPhotos(true)}
                   className="aspect-square object-cover w-[100%]"
-                  src={"http://localhost:3000/uploads/" + place.photos?.[1]}
+                  src={place.photos?.[1].photoUrl}
                   alt="Image here"
                 />
               )}
@@ -75,7 +78,7 @@ const PlaceGallery = ({ place }) => {
                 <img
                   onClick={() => setshowAllPhotos(true)}
                   className="aspect-square object-cover w-[100%]"
-                  src={"http://localhost:3000/uploads/" + place.photos?.[2]}
+                  src={place.photos?.[2].photoUrl}
                   alt="Image here"
                 />
               )}

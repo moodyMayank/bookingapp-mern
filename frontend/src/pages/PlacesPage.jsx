@@ -49,7 +49,7 @@ const PlacesPage = () => {
                   {place.photos.length > 0 && (
                     <img
                       className="w-[100%] object-cover"
-                      src={"http://localhost:3000/uploads/" + place.photos[0]}
+                      src={place.photos[0].photoUrl}
                       alt=""
                     />
                   )}

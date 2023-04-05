@@ -148,6 +148,7 @@ app.post("/upload-by-link", async (req, res) => {
       resource_type: "image",
     })
     .then((result) => {
+      console.log(result);
       res.json({
         photoId: result.public_id,
         photoUrl: result.secure_url,
@@ -155,33 +156,33 @@ app.post("/upload-by-link", async (req, res) => {
     });
 });
 
-const photosMiddleware = multer({ dest: "/tmp" });
-app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
-  const uploadedFiles = [];
-  for (let i = 0; i < req.files.length; i++) {
-    console.log(req.files[i]);
-    const { path, originalname } = req.files[i];
-    console.log(path, originalname);
-    const parts = originalname.split(".");
-    const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext.toLowerCase();
-    console.log(newPath);
-    cloudinary.uploader
-      .upload(newPath, {
-        folder: "placeImages",
-        use_filename: true,
-        resource_type: "image",
-      })
-      .then((result) => {
-        console.log(result);
-        uploadedFiles.push({
-          photoId: result.public_id,
-          photoUrl: result.secure_url,
-        });
-      });
-  }
-  res.json(uploadedFiles);
-});
+// const photosMiddleware = multer({ dest: "/tmp" });
+// app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
+//   const uploadedFiles = [];
+//   for (let i = 0; i < req.files.length; i++) {
+//     console.log(req.files[i]);
+//     const { path, originalname } = req.files[i];
+//     console.log(path, originalname);
+//     const parts = originalname.split(".");
+//     const ext = parts[parts.length - 1];
+//     const newPath = path + "." + ext.toLowerCase();
+//     console.log(newPath);
+//     cloudinary.uploader
+//       .upload(newPath, {
+//         folder: "placeImages",
+//         use_filename: true,
+//         resource_type: "image",
+//       })
+//       .then((result) => {
+//         console.log(result);
+//         uploadedFiles.push({
+//           photoId: result.public_id,
+//           photoUrl: result.secure_url,
+//         });
+//       });
+//   }
+//   res.json(uploadedFiles);
+// });
 
 app.post("/places", (req, res) => {
   const { token } = req.cookies;
