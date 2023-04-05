@@ -140,6 +140,7 @@ app.post("/upload-by-link", async (req, res) => {
     url: link,
     dest: filePath,
   });
+  console.log("by link ", filePath);
   cloudinary.uploader
     .upload(filePath, {
       folder: "placeImages",
@@ -171,6 +172,7 @@ app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
         resource_type: "image",
       })
       .then((result) => {
+        console.log(result);
         uploadedFiles.push({
           photoId: result.public_id,
           photoUrl: result.secure_url,
