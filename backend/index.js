@@ -21,6 +21,7 @@ const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "lajlsjldalbflalfjlajdlajldjlasda";
 
+// built in middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -131,24 +132,6 @@ app.get("/profile", (req, res) => {
   }
 });
 
-function uploadCloudinary(filePath) {
-  let imageInfo;
-  cloudinary.uploader
-    .upload(filePath, {
-      folder: "placeImages",
-      use_filename: true,
-      resource_type: "image",
-    })
-    .then((result) => {
-      console.log("success", JSON.stringify(result, null, 2));
-      imageInfo = JSON.stringify(result, null, 2);
-      return imageInfo;
-    })
-    .catch((error) => {
-      console.log("error", JSON.stringify(error, null, 2));
-    });
-}
-
 app.post("/upload-by-link", async (req, res) => {
   const { link } = req.body;
   const newName = "photo" + Date.now() + ".jpg";
@@ -164,8 +147,6 @@ app.post("/upload-by-link", async (req, res) => {
       resource_type: "image",
     })
     .then((result) => {
-      console.log("Printing result ", result);
-      console.log("success", JSON.stringify(result, null, 2));
       res.json({
         photoId: result.public_id,
         photoUrl: result.secure_url,
@@ -178,11 +159,24 @@ app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
   const uploadedFiles = [];
   for (let i = 0; i < req.files.length; i++) {
     const { path, originalname } = req.files[i];
+    console.log(path, originalname);
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext.toLowerCase();
-    const result = uploadCloudinary(newPath);
-    uploadedFiles.push(result.url);
+    const filePath = "/tmp" + newPath;
+    console.log(filePath);
+    cloudinary.uploader
+      .upload(filePath, {
+        folder: "placeImages",
+        use_filename: true,
+        resource_type: "image",
+      })
+      .then((result) => {
+        uploadedFiles.push({
+          photoId: result.public_id,
+          photoUrl: result.secure_url,
+        });
+      });
   }
   res.json(uploadedFiles);
 });
