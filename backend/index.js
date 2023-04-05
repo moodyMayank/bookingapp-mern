@@ -163,10 +163,9 @@ app.post("/upload", photosMiddleware.array("photos", 100), async (req, res) => {
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext.toLowerCase();
-    const filePath = "/tmp" + newPath;
-    console.log(filePath);
+    console.log(newPath);
     cloudinary.uploader
-      .upload(filePath, {
+      .upload(newPath, {
         folder: "placeImages",
         use_filename: true,
         resource_type: "image",
